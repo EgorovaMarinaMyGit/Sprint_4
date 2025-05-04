@@ -22,7 +22,7 @@ class TestBooksCollector:
 
         # проверяем, что добавилось именно две
         # словарь books_rating, который нам возвращает метод get_books_rating, имеет длину 2
-        assert len(collector.get_books_rating()) == 2
+        assert len(collector.add_new_book()) == 2
 
     # напиши свои тесты ниже
     # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
@@ -94,11 +94,15 @@ class TestBooksCollector:
         collector.set_book_genre('Детектив1', 'Детективы')
         collector.set_book_genre('Комедия1', 'Комедии')
         collector.set_book_genre('Мультфильм1', 'Мультфильмы')
-        assert collector.get_books_genre() == ['Ужасы', 'Детективы', 'Комедии', 'Мультфильмы']
+        assert collector.get_books_genre() == {'Ужасы', 'Детективы', 'Комедии', 'Мультфильмы'}
 
 
 # 6. get_books_for_children
     # 6.1
+    @pytest.mark.parametrize("name", [
+        ('Одиссея'),
+        ('Капитана Блада')
+    ])
     def test_get_books_for_children(self):
         collector = BooksCollector()
         
@@ -139,7 +143,6 @@ class TestBooksCollector:
         collector = BooksCollector()
     
         collector.add_new_book(name)
-        self.favorites = []
         collector.add_book_in_favorites(name)
         collector.add_book_in_favorites(name)
         assert len(collector.get_list_of_favorites_books()) == 1
