@@ -94,7 +94,14 @@ class TestBooksCollector:
         collector.set_book_genre('Детектив1', 'Детективы')
         collector.set_book_genre('Комедия1', 'Комедии')
         collector.set_book_genre('Мультфильм1', 'Мультфильмы')
-        assert collector.get_books_genre() == {'Ужасы', 'Детективы', 'Комедии', 'Мультфильмы'}
+
+        expected_result = {
+            'Ужасы1': 'Ужасы',
+            'Детектив1': 'Детективы', 
+            'Комедия1': 'Комедии', 
+            'Мультфильм1': 'Мультфильмы'
+        }
+        assert collector.get_books_genre() == expected_result
 
 
 # 6. get_books_for_children
@@ -103,7 +110,7 @@ class TestBooksCollector:
         ('Одиссея'),
         ('Капитана Блада')
     ])
-    def test_get_books_for_children(self):
+    def test_get_books_for_children(self, name):
         collector = BooksCollector()
         
         books = ['Ужасы1', 'Детектив1', 'Комедия1', 'Сказка', 'Детская книга', 'Фантастика1']
